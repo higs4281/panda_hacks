@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>PANDA</title>
+    <title>PANDA arrest search</title>
     <link rel="icon" href="{{ settings.STATIC_URL }}img/favicon.ico" />
 
     {% compress css %}
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ settings.STATIC_URL }}css/bootstrap.css" type="text/css" charset="utf-8" />
     <link rel="stylesheet" href="{{ settings.STATIC_URL }}css/panda.css" type="text/css" charset="utf-8"/>
     {% endcompress %}
+    <style>.navbar {display: block;}</style>
 </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -21,15 +22,15 @@
                 <ul class="nav pull-left">
                     <li id="logo"><a href="/#search/all"><img src="{{ settings.STATIC_URL }}img/panda_and_ire.png" /></a></li>
                 </ul>
+                <ul class="nav pull-right"></ul>
             </div>
         </div>
    </div>
-    <div id="content" class="container-fluid">
-    <style>#watcher {margin-top:-200px; margin-left:20px}</style>
-
+    <div id="content" class="container-fluid"  style="background: white;">
 
         <div id="watcher" class="container-fluid">
-        <h2>Search recent arrests</h2><br clear="all" />
+        <h2>Search recent arrests</h2>
+        <p>Looks across Hillsborough, Pinellas, Pasco, Hernando, Manatee and Charlotte counties.</p>
         <form id="arrestee">
         <label>First name: </label>
         <input type="text" id="fn"/><br/>
@@ -40,8 +41,18 @@
         <input type="submit" value="Submit">
         </form><br/>
         </div>
+    {% compress js %}
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/bootbox.js"></script>
+        <script type="text/javascript" src="{{ settings.STATIC_URL }}js/utils.js"></script>
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/application.js"></script>
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/errors.js"></script>
+    {% endcompress %}
 
 <script> 
+    $('#fn').focus();
     $('#arrestee').submit(function( event ) {
         var uri = "";
         var fn = $("#fn").val().trim();        
@@ -60,25 +71,8 @@
     });
 </script>
     </div>
-    {% compress js %}
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/jquery-1.7.1.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/bootstrap.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/json2.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/moment.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/utils.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/application.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/errors.js"></script>
-    {% endcompress %}
-
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/excanvas.min.js"></script><![endif]-->
 
-    {% if moment_lang_code %}
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/moment/{{ moment_lang_code }}.js"></script>
-    <script type="text/javascript">
-        moment.lang("{{ settings.LANGUAGE_CODE }}");
-    </script>
-    {% endif %}
 
     <script type="text/javascript">
         PANDA.settings.VERSION = "{{ settings.PANDA_VERSION }}";
@@ -99,21 +93,6 @@
     <script type="text/javascript" src="templates.js"></script>
     <script type="text/javascript" src="i18n.js"></script>
 
-    {% compress js %}
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/text/home.js"></script>
-    {% endcompress %}
-
-    <script type="text/javascript">
-        $('#fn').focus();
-        // $(function() {
-        //     // Bootstrap inline text for all views
-        //     PANDA.inlines_text = PANDA.text.Inlines();
-
-        //     window.Redd = new PANDA.views.Root();
-        //     Redd.start_routing();
-
-        //     $('a[rel="popover"]').popover();
-        // })
-    </script>
 </body>
 </html>
+
