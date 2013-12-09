@@ -53,6 +53,11 @@ def index(request):
         'moment_lang_code': settings.MOMENT_LANGUAGE_MAPPING.get(settings.LANGUAGE_CODE, None),
     })
 
+def arrest_search(request):
+    return render_to_response('arrest_search.html', {
+        'settings': settings
+        })
+
 def dashboard(request):
     """
     Render HTML for dashboard/metrics view.
