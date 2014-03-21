@@ -9,7 +9,7 @@ PANDA.views.Home = Backbone.View.extend({
         var recent_datasets = new PANDA.collections.Datasets()
 
         recent_datasets.fetch({
-            data: { limit: 5 },
+            data: { limit: 25 },
             success: _.bind(function() {
                 var context = PANDA.utils.make_context({
                     text: this.text,

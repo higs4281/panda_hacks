@@ -28,18 +28,45 @@
    </div>
     <div id="content" class="container-fluid"  style="background: white;">
 
-        <div id="watcher" class="container-fluid">
-        <h2>Search recent arrests</h2>
-        <p>Looks across Hillsborough, Pinellas, Pasco, Hernando, Manatee and Charlotte counties.</p>
+        <div class="container-fluid">
+        <h2>Search arrests by name</h2>
+        <p>Looks across Hillsborough, Pinellas, Pasco, Hernando, Manatee and Charlotte counties, dating to June 2012.</p>
         <form id="arrestee">
         <label>First name: </label>
-        <input type="text" id="fn"/><br/>
+        <input type="text" id="fn"/><br>
         <label>Last name: </label>
-        <input type="text" id="ln"/><br/>
+        <input type="text" id="ln"/><br>
         <label>DOB (optional): </label>
         <input type="date" id="dob" placeholder="mm-dd-YYYY"/>
         <input type="submit" value="Submit">
-        </form><br/>
+        </form><br>
+        </div>
+        <div class="container-fluid">
+        <h2>Search arrests  by employer</h2>
+        <p>Hillsborough is the only county that regularly reports employer info.</p>
+        <form id="employer">
+        <input placeholder="examples: yankees, times, tribune" type="text" id="emp" type="text" id="emp"/><br>
+        <input type="submit" value="Submit">
+        </form><br>
+        </div>
+        <div class="container-fluid">
+        <h2>Search crime calls by address</h2>
+        <p>Checks addresses in Hillsborough, Pinellas, Pasco or Hernando for crime calls, dating to November 2011.</p>
+        <form id="crimecalls">
+        <label>Number: </label>
+        <input type="text" id="number"/><br>
+        <label>Street name (no directionals): </label>
+        <input type="text" id="street"/><br>
+        <label>County: </label>
+        <select name="county" id='county'>
+          <option value="" selected="selected">----</option>
+          <option value="hillsborough">Hillsborough</option>
+          <option value="pinellas">Pinellas</option>
+          <option value="pasco">Pasco</option>
+          <option value="hernando">Hernando</option>
+        </select>
+        <input type="submit" value="Submit">
+        </form><br>
         </div>
     {% compress js %}
     <script type="text/javascript" src="{{ settings.STATIC_URL }}js/lib/jquery-1.7.1.js"></script>
@@ -68,6 +95,29 @@
         if ( fn && ln ) {
             window.location = uri;
             }
+    });
+    $('#employer').submit(function( event ) {
+        var emp = $("#emp").val().trim();        
+        var uri = "http://ec2-50-16-235-71.compute-1.amazonaws.com//watcher/arrestee/employed/"+emp+"/";
+        event.preventDefault();
+        if ( emp ) {
+            window.location = uri;
+            }
+    });
+    $('#crimecalls').submit(function( event ) {
+        var uri = "";
+        var numb = $("#number").val().trim();        
+        var street = $("#street").val().trim();        
+        var county = $("#county").val();  
+        event.preventDefault();
+        if ( numb && street ) {
+            if ( county ) {
+                    uri = "http://ec2-107-20-94-55.compute-1.amazonaws.com/watch/crime/by-address/"+numb+"/"+street+"/"+county+"/";
+                } else {
+                    uri = "http://ec2-107-20-94-55.compute-1.amazonaws.com/watch/crime/by-address/"+numb+"/"+street+"/";
+            };
+            window.location = uri;
+            };
     });
 </script>
     </div>

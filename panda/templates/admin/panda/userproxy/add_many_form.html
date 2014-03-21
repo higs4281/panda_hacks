@@ -48,7 +48,7 @@
 
 <p><strong><code>XX@tampabay.com,panda,first_name,last_name</code></strong></p>
 
-<textarea name="user-data" rows="20", cols="100" value="">{% if user_data %}{% autoescape off %}{{ user_data }}{% endautoescape %}{% else %}example@example.com,mypass123,John,Doe{% endif %}</textarea><br />
+<textarea name="user-data" rows="20", cols="100" value="">{% if user_data %}{% autoescape off %}{{ user_data }}{% endautoescape %}{% else %}example@tampabay.com,panda,John,Doe{% endif %}</textarea><br />
 <input type="submit" value="Add new users" />
 
 {% for fieldset in adminform %}
