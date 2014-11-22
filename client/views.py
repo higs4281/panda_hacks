@@ -26,6 +26,7 @@ def index(request):
     """
     serializer = Serializer()
     cr = CategoryResource()
+    rcount = sum([each.row_count for each in Dataset.objects.all()])
 
     categories = list(Category.objects.annotate(dataset_count=Count('datasets')))
 
@@ -43,6 +44,7 @@ def index(request):
 
     return render_to_response('index.html', {
         'settings': settings,
+        'rcount': rcount,
         'warn_upload_size': int(config_value('MISC', 'WARN_UPLOAD_SIZE')),
         'max_upload_size': int(config_value('MISC', 'MAX_UPLOAD_SIZE')),
         'email_enabled': int(config_value('EMAIL', 'EMAIL_ENABLED')),

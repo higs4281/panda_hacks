@@ -417,7 +417,8 @@ class DataResource(PandaResource):
         self.throttle_check(request)
 
         try:
-            query = '(%s)' % request.GET['q']
+#            query = '(%s)' % request.GET['q']
+            query = request.GET['q']
         except KeyError:
             query = ''
 
@@ -546,7 +547,8 @@ class DataResource(PandaResource):
         dataset = Dataset.objects.get(slug=kwargs['dataset_slug'])
 
         try:
-            query = '(%s)' % request.GET['q']
+#            query = '(%s)' % request.GET['q']
+            query = request.GET['q']
         except KeyError:
             query = ''
 

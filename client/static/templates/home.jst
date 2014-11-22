@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="span6">
-            <h3><%= text.recently_added_datasets %></h3>
+            <h3><%= text.recently_added_datasets %> (<%= rcount %> rows in all)</h3>
             <% _.each(recent.datasets, function(dataset) { %>
                 <h4><a href="#dataset/<%= dataset.slug %>"><%= unescape(dataset.name) %></a></h4>
                 <% if (dataset.description) { %><p><em><%= unescape(dataset.description) %></em></p><% } %>
