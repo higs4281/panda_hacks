@@ -121,10 +121,10 @@
         var ln = $("#ln").val().trim();        
         var dob = $("#dob").val();  
         if (dob) {
-            uri = "http://ec2-50-16-235-71.compute-1.amazonaws.com/watcher/dobname/"+fn+"/"+ln+"/"+dob+"/"
+            uri = "{{ settings.WATCHER_URL }}dobname/"+fn+"/"+ln+"/"+dob+"/"
         }
         else {
-            uri = "http://ec2-50-16-235-71.compute-1.amazonaws.com/watcher/dobname/"+fn+"/"+ln+"/"
+            uri = "{{ settings.WATCHER_URL }}dobname/"+fn+"/"+ln+"/"
         };
         event.preventDefault();
         if ( fn && ln ) {
@@ -133,7 +133,7 @@
     });
     $('#employer').submit(function( event ) {
         var emp = $("#emp").val().trim();        
-        var uri = "http://ec2-50-16-235-71.compute-1.amazonaws.com//watcher/arrestee/employed/"+emp+"/";
+        var uri = "{{ settings.WATCHER_URL }}arrestee/employed/"+emp+"/";
         event.preventDefault();
         if ( emp ) {
             window.location = uri;
@@ -147,9 +147,9 @@
         event.preventDefault();
         if ( numb && street ) {
             if ( county ) {
-                    uri = "http://ec2-107-20-94-55.compute-1.amazonaws.com/watch/crime/by-address/"+numb+"/"+street+"/"+county+"/";
+                    uri = "{{ settings.CRIME_URL }}crime/by-address/"+numb+"/"+street+"/"+county+"/";
                 } else {
-                    uri = "http://ec2-107-20-94-55.compute-1.amazonaws.com/watch/crime/by-address/"+numb+"/"+street+"/";
+                    uri = "{{ settings.CRIME_URL }}crime/by-address/"+numb+"/"+street+"/";
             };
             window.location = uri;
             };
@@ -172,7 +172,7 @@
         var cdate = $("#cdate").val();  
         event.preventDefault();
         if ( county && cdate ) {
-            uri = "http://ec2-50-16-235-71.compute-1.amazonaws.com/watcher/arrestee/county/"+county+"/"+cdate+"/"
+            uri = "{{ settings.WATCHER_URL }}watcher/arrestee/county/"+county+"/"+cdate+"/"
             window.location = uri;
             };
     });

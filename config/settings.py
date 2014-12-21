@@ -55,6 +55,8 @@ LOCALE_PATHS = (os.path.join(SITE_ROOT, 'locale'),)
 STATIC_ROOT = os.path.join(SITE_ROOT, 'media')
 STATIC_URL = '/site_media/'
 ADMIN_MEDIA_PREFIX = '/site_media/admin/'
+WATCHER_URL = 'http://50.16.235.71/watcher/'
+CRIME_URL = 'http://107.20.94.55/watch/'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
